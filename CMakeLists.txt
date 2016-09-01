@@ -8,6 +8,8 @@ if (EXISTS buildpresets_userdefined.cmake)
 endif()
 include(buildpresets.cmake)
 
+enable_testing()
+
 
 #check compiller
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
@@ -128,6 +130,10 @@ STRING(REGEX REPLACE ";" ", " DEPS_DEV "${DEPS_DEV}")
 
 # START RECURSIVE
 add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+
+# TESTS
+add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/test)
 
 
 
