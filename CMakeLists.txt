@@ -105,9 +105,8 @@ endmacro()
 
   # FIND & CHECK PRINCIPAL LIBRARIES
 
-include(FindPkgConfig)
-
-
+#include(FindPkgConfig)
+messade()
 link_directories(${INTERFACES_CPP_DIR}/jderobot)
 FOREACH(LibFile ${LIBS_NEEDED})
     link_directories(${LIBS_DIR}/${LibFile})
