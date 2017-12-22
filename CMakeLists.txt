@@ -61,7 +61,13 @@ SET( INTERFACES_PYTHON_DIR ${CMAKE_CURRENT_BINARY_DIR}/src/interfaces/python/jde
 # Folder with ICE java interfaces
 SET( INTERFACES_JAVA_DIR ${CMAKE_CURRENT_BINARY_DIR}/src/interfaces/java/jderobot ${CMAKE_CURRENT_BINARY_DIR}/src/interfaces/java/)
 # Folder JdeRobot libraries 
-SET( LIBS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/libs) 
+SET( LIBS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/libs/) 
+# Folder JdeRobot tools 
+SET( TOOLS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/tools)
+# Folder JdeRobot drivers 
+SET( DRIVERS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers)
+# Folder JdeRobot examples 
+SET( EXAMPLES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/examples)
 # Folder ICE interface definitions
 SET( SLICE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces/slice)
 # Main libraries
@@ -134,6 +140,30 @@ macro(list_subdirectories3 retval curdir return_relative)
   set(${retval} ${list_of_dirs})
 endmacro()
 
+# MACRO to add the list subdir of other path distinct to current path to another list
+macro(list_subdirectories4 retval curdir return_relative)
+  file(GLOB sub-dir RELATIVE ${curdir} ${curdir}*)
+  set(list_of_dirs ${${retval}})
+  foreach(dir ${sub-dir})
+    if(IS_DIRECTORY ${curdir}/${dir})
+      if (${return_relative})
+        list (FIND list_of_dirs "${dir}" _index)
+        if (NOT ${_index} GREATER -1)
+          if (NOT ${dir} MATCHES "CMakeFiles" AND NOT ${dir} MATCHES ".svn")
+                set(list_of_dirs ${list_of_dirs} ${dir})
+          endif()
+        endif()
+      else()
+        list (FIND list_of_dirs "${curdir}/${dir}" _index)
+        if (NOT ${_index} GREATER -1)
+          set(list_of_dirs ${list_of_dirs} ${curdir}/${dir})
+        endif()
+      endif()
+    endif()
+  endforeach()
+  set(${retval} ${list_of_dirs})
+endmacro()
+
 
 
 ###################
@@ -145,6 +175,8 @@ endmacro()
   # FIND & CHECK PRINCIPAL LIBRARIES
 
 include(FindPkgConfig)
+
+include(options.cmake)
 
 
 link_directories(${INTERFACES_CPP_DIR}/jderobot)
