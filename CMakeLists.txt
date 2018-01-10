@@ -51,6 +51,9 @@ endif()
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall" ) # Opciones para el compilador
 
 
+INCLUDE_DIRECTORIES(/opt/jderobot/include)
+LINK_DIRECTORIES(/opt/jderobot/lib)
+set (CMAKE_LIBRARY_PATH /opt/jderobot/lib)
 # ENV VARS
 SET(gladedir ./)
 SET( DEPS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Deps) # Directory where the dependencies are there
