@@ -1,0 +1,7 @@
+rosBitDriver:
+  Bit:
+    Server: 2 # 0 -> Deactivate, 1 -> Ice , 2 -> ROS
+    Proxy: "cameraA:tcp -h localhost -p 9999"
+    Topic: "bit"
+
+  NodeName: rosBitDriver

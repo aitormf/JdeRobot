@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 project(jderobotInterfaces)
 
+if(ENABLE_ROS)
+  add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/messages)
+endif()
+
 set(SLICE_NEW_STYLE "ON")
 if (NOT DEFINED SLICE_NEW_STYLE)
 

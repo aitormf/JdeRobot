@@ -1,0 +1,39 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(jderobot_msgs)
+
+#usePython(2)
+
+#find_package(catkin REQUIRED COMPONENTS
+#   roscpp
+#   rospy
+#   std_msgs
+#   message_generation
+#)
+
+add_message_files(
+  FILES
+  bit.msg
+)
+
+
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
+
+message("${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_PYTHON_DESTINATION}")
+
+
+set(${PROJECT_NAME}_FOUND 1 CACHE BOOL "Find(${PROJECT_NAME})")
+set(${PROJECT_NAME}_INCLUDE_DIRS "${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_INCLUDE_DESTINATION}" CACHE PATH "Find(${PROJECT_NAME})")
+
+install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/include
+    COMPONENT ${PROJECT_NAME}
+)
+
+install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_PYTHON_DESTINATION}
+    DESTINATION ${JDEROBOT_PYTHON_MODULE_PATH}
+    COMPONENT ${PROJECT_NAME}
+)
